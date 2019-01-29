@@ -9,7 +9,9 @@
     "node": "10.15.1"
   },
   "scripts": {
-    "start": "better-npm-run start",
+    "start": "node server.js",
+    "heroku-postbuild": "rimraf dist && mkdir dist && webpack --optimize-minimize --progress --colors --config ./webpack/webpack.config.prod.js --bail",
+    "dev": "better-npm-run start",
     "build": "better-npm-run build:prod",
     "start:prod": "better-npm-run start:prod",
     "test": "better-npm-run test",
