@@ -7,10 +7,23 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
     html, body, .root-entry, .app-root {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Open sans', sans-serif;
+        font-size: 14px;
         height: 100%;
         margin: 0;
         padding: 0;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    h1 {
+        font-size: 31px;
+    }
+
+    .container {
+        padding: 0 40px;
     }
 `;
 

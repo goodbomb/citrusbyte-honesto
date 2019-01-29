@@ -3,18 +3,16 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledContent = styled.section`
-    align-items: center;
     display: flex;
     flex: 1;
     flex-direction: column;
-    justify-content: center;
     min-height: 100px;
-    padding-bottom: 100px;
+    padding: 60px 40px 100px;
 `;
 
 const Content = function(props) {
     return (
-        <StyledContent className="main-content-area">
+        <StyledContent className="main">
             {props.children}
         </StyledContent>
     );

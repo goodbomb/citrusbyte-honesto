@@ -3,7 +3,7 @@ import {
     Route,
     Switch
 } from 'react-router-dom';
-import { HomeView, ErrorView } from './';
+import { ShareFeedback, MyFeedback, ErrorView } from './';
 
 /**
  * These routes are ONLY the base routes that are necessary in order to not trigger the ErrorView.
@@ -17,7 +17,8 @@ export const Routes = {
         return (
             <div className="routes">
                 <Switch>
-                    <Route path="/" exact={true} component={HomeView} />
+                    <Route path="/" exact={true} component={ShareFeedback} />
+                    <Route path="/my-feedback" exact={true} component={MyFeedback} />
 
                     <Route component={ErrorView} />
                 </Switch>

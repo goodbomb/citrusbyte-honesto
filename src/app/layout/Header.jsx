@@ -1,19 +1,129 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { palette } from 'theme';
 
 const StyledHeader = styled.section`
     align-items: center;
     background-color: ${palette.accentColor};
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
     display: flex;
-    height: 100px;
+    height: 75px;
     justify-content: center;
 `;
 
+const NavBar = styled.nav`
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+    height: 100%;
+    justify-content: space-between;
+    width: 100%;
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        justify-self: start;
+    }
+
+    .nav-menu {
+        align-items: center;
+        display: flex;
+        font-weight: bold;
+        height: 100%;
+        justify-content: space-evenly;
+        list-style: none;
+        margin: 0;
+
+        .menu-item {
+            margin: 0 30px;
+        }
+    }
+
+    .feedback-cycle {
+        margin: 0 15px 0 auto;
+        text-align: right;
+
+        .label {
+            color: #59636e;
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+
+        .feedback-date {
+            .days-remaining {
+                color: #21b7a2;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .user {
+        align-items: center;
+        border-left: 1px solid #d9dcde;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+
+        .user-photo {
+            align-items: center;
+            background-color: #ffffff;
+            border-radius: 99px;
+            display: flex;
+            height: 58px;
+            justify-content: center;
+            margin: 0 15px;
+            overflow: hidden;
+            width: 58px;
+
+            .photo {
+                height: 58px;
+            }
+        }
+
+        .user-name {
+            .logout {
+                font-size: 12px;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+            }
+        }
+    }
+`;
+
 const Header = function() {
+    const imageSrc = 'https://cdn-images-1.medium.com/max/1920/1*0ubYRV_WNR9iYrzUAVINHw.jpeg';
+
     return (
         <StyledHeader className="header">
-            Honesto
+            <NavBar className="header-nav container">
+                <div className="logo">Honesto</div>
+                <ul className="nav-menu">
+                    <li className="menu-item">
+                        <Link to="/">Share Feedback</Link>
+                    </li>
+                    <li className="menu-item">
+                        <Link to="/my-feedback">My Feedback</Link>
+                    </li>
+                    <li className="menu-item">Team Feedback</li>
+                    <li className="menu-item">Teams</li>
+                </ul>
+                <div className="feedback-cycle">
+                    <div className="label">Next Feedback Cycle:</div>
+                    <div className="feedback-date">
+                        <div className="date">Feb 15 <span className="days-remaining">- 4 days</span></div>
+                    </div>
+                </div>
+                <div className="user">
+                    <div className="user-photo">
+                        <img src={imageSrc} alt="" className="photo" />
+                    </div>
+                    <div className="user-name">
+                        <div className="name">Wade Wilson</div>
+                        <a href="" className="logout">Logout</a>
+                    </div>
+                </div>
+            </NavBar>
         </StyledHeader>
     );
 };
