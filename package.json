@@ -6,7 +6,7 @@
   "main": "src/main.js",
   "license": "N/A",
   "engines": {
-    "node": ">= 6.11.3"
+    "node": ">= 10.15.1"
   },
   "scripts": {
     "start": "better-npm-run start",
