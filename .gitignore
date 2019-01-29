@@ -6,6 +6,8 @@
 /dist
 /dist/*
 .eslintcache
+# Ignore package-lock to work around checksum errors on heroku
+package-lock.json
 
 # Configuration Files
 .env
