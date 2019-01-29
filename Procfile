@@ -1,4 +1,4 @@
 // Procfile
 
 web: npm install
-web: npm run start:prod
+web: npm start
