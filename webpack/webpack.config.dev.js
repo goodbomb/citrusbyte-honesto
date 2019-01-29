@@ -17,6 +17,9 @@ module.exports = {
         filename: 'bundle.js'
     },
     devtool: 'eval-source-map',
+    performance: {
+        hints: false
+    },
     module: {
         rules: [
             {
