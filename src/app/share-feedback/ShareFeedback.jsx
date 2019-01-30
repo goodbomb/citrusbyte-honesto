@@ -27,7 +27,6 @@ class ShareFeedback extends Component {
         const feedback = JSON.parse(localStorage.getItem('feedback'));
 
         if (feedback && !state.users.length) {
-            console.log('triggered');
             const allFeedback = [
                 ...feedback.todo,
                 ...feedback.completed
