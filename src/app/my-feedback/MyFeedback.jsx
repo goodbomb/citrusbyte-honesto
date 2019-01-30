@@ -6,11 +6,13 @@ const StyledFeedback = styled.section`
 `;
 
 const MyFeedback = function() {
+
     return (
         <StyledFeedback className="my-feedback">
             <h1>My Feedback</h1>
         </StyledFeedback>
     );
+
 };
 
 export default MyFeedback;

@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import { Routes } from './';
 import { Layout } from 'app/layout';
 import { createGlobalStyle } from 'styled-components';
+import { palette } from 'theme';
 
 const GlobalStyle = createGlobalStyle`
     html, body, .root-entry, .app-root {
@@ -24,6 +25,41 @@ const GlobalStyle = createGlobalStyle`
 
     .container {
         padding: 0 40px;
+    }
+
+    button {
+        height: 48px;
+        min-width: 150px;
+        outline: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    button.primary {
+        background-color: ${palette.primaryColor};
+        border: solid 1px ${palette.primaryColor};
+        border-radius: 4px;
+        color: ${palette.accentTextColor};
+        transition: background-color 0.25s, color 0.25s;
+
+        &:hover {
+            background-color: ${palette.canvasColor};
+            color: ${palette.primaryColor};
+        }
+    }
+
+    button.secondary {
+        background-color: ${palette.canvasColor};
+        border: solid 1px ${palette.borderColor};
+        border-radius: 4px;
+        font-weight: bold;
+        transition: background-color 0.25s;
+
+        &:hover {
+            background-color: #f2f3f4;
+        }
     }
 `;
 

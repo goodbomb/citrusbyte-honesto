@@ -23,6 +23,7 @@ const StyledFooter = styled.section`
 `;
 
 const Footer = function() {
+
     return (
         <StyledFooter className="footer">
             <div className="footer-inner container">
@@ -31,6 +32,7 @@ const Footer = function() {
             </div>
         </StyledFooter>
     );
+
 };
 
 export default Footer;

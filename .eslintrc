@@ -122,6 +122,9 @@
             "capIsNew": false
         }],
         "no-console": [2, {"allow": ["info", "warn", "error"]}],
+        "padded-blocks": [2, {
+            "classes": "always"
+        }],
         "spaced-comment": [2, "always", { "exceptions": ["*"] }]
     }
 }

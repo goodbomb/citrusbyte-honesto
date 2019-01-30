@@ -92,6 +92,7 @@ const NavBar = styled.nav`
 `;
 
 const Header = function() {
+
     const imageSrc = 'https://cdn-images-1.medium.com/max/1920/1*0ubYRV_WNR9iYrzUAVINHw.jpeg';
 
     return (
@@ -126,6 +127,7 @@ const Header = function() {
             </NavBar>
         </StyledHeader>
     );
+
 };
 
 export default Header;

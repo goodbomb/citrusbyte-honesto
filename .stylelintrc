@@ -92,6 +92,9 @@
         "selector-pseudo-element-case": "lower",
         "selector-pseudo-element-colon-notation": "double",
         "selector-type-case": "lower",
+        selector-type-no-unknown: [true, {
+            ignore: ["custom-elements", "default-namespace"]
+        }],
         "shorthand-property-no-redundant-values": true,
         "string-no-newline": true,
         "string-quotes": "single",
