@@ -31,37 +31,27 @@ const StyledUserListItem = styled.li`
 `;
 
 const StyledName = styled.div`
-    font-size: 22px;
-
     ${StyledUserListItem}:hover & {
         color: #031323;
     }
 `;
 
-const UserListItem = ({ user }) => {
+const UserListSidebarItem = ({ user }) => {
 
     const defaultAvatar = 'https://www.cansolveckd.ca/wp-content/uploads/2018/07/generic-avatar.png';
 
-    if (user) {
-        return (
-            <StyledUserListItem>
-                <div className="avatar">
-                    <img src={user.avatar || defaultAvatar} alt="user avatar" />
-                </div>
-                <StyledName className="name">{user.name}</StyledName>
-                {user.submission.complete
-                    ? <button className="view-submission secondary">View Submission</button>
-                    : <button className="fill-out primary">Fill Out</button>
-                }
-            </StyledUserListItem>
-        );
-    }
-
-    return <div />;
+    return (
+        <StyledUserListItem>
+            <div className="avatar">
+                <img src={user.avatar || defaultAvatar} alt="user avatar" />
+            </div>
+            <StyledName className="name">{user.name}</StyledName>
+        </StyledUserListItem>
+    );
 };
 
-UserListItem.propTypes = {
+UserListSidebarItem.propTypes = {
     user: PropTypes.object
 };
 
-export default UserListItem;
+export default UserListSidebarItem;

@@ -19,31 +19,29 @@ class ShareFeedback extends Component {
         super(props);
 
         this.state = {
-            users: [
-                {
-                    id: '9390823928',
-                    name: 'Peter Parker',
-                    avatar: 'https://preview.redd.it/9ej9735r8dv11.png?width=331&auto=webp&s=d9491933c36ff23ff11d6fbf0d403cb7bedace24',
-                    submission: {
-                        id: '5992758510',
-                        complete: false
-                    }
-                },
-                {
-                    id: '5385527224',
-                    name: 'Frank Castle',
-                    avatar: 'https://avatarfiles.alphacoders.com/151/151995.jpg',
-                    submission: {
-                        id: '8645150742',
-                        complete: true
-                    }
-                }
-            ]
+            users: []
         };
     }
 
-    render() {
+    static getDerivedStateFromProps(props, state) {
+        const feedback = JSON.parse(localStorage.getItem('feedback'));
 
+        if (feedback && !state.users.length) {
+            console.log('triggered');
+            const allFeedback = [
+                ...feedback.todo,
+                ...feedback.completed
+            ];
+
+            return {
+                users: allFeedback
+            };
+        }
+
+        return null;
+    }
+
+    render() {
         return (
             <StyledFeedback className="share-feedback">
                 <div className="wrapper">

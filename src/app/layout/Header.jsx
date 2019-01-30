@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { palette } from 'theme';
 
 const StyledHeader = styled.section`
@@ -24,6 +25,7 @@ const NavBar = styled.nav`
         font-size: 24px;
         font-weight: bold;
         justify-self: start;
+        margin-right: 40px;
     }
 
     .nav-menu {
@@ -31,12 +33,26 @@ const NavBar = styled.nav`
         display: flex;
         font-weight: bold;
         height: 100%;
-        justify-content: space-evenly;
-        list-style: none;
-        margin: 0;
 
         .menu-item {
-            margin: 0 30px;
+            align-items: center;
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            margin: 0 40px;
+
+            a {
+                border-bottom: solid 3px transparent;
+                padding: 30px 0 23px;
+
+                &:visited {
+                    color: ${palette.primaryTextColor};
+                }
+
+                &.active, &:hover {
+                    border-bottom: solid 3px ${palette.primaryColor};
+                }
+            }
         }
     }
 
@@ -91,24 +107,24 @@ const NavBar = styled.nav`
     }
 `;
 
-const Header = function() {
+const Header = ({ user }) => {
 
-    const imageSrc = 'https://cdn-images-1.medium.com/max/1920/1*0ubYRV_WNR9iYrzUAVINHw.jpeg';
+    const defaultAvatar = 'https://www.cansolveckd.ca/wp-content/uploads/2018/07/generic-avatar.png';
 
     return (
         <StyledHeader className="header">
             <NavBar className="header-nav container">
                 <div className="logo">Honesto</div>
-                <ul className="nav-menu">
-                    <li className="menu-item">
-                        <Link to="/">Share Feedback</Link>
-                    </li>
-                    <li className="menu-item">
-                        <Link to="/my-feedback">My Feedback</Link>
-                    </li>
-                    <li className="menu-item">Team Feedback</li>
-                    <li className="menu-item">Teams</li>
-                </ul>
+                <div className="nav-menu">
+                    <div className="menu-item">
+                        <NavLink exact={true} to="/">Share Feedback</NavLink>
+                    </div>
+                    <div className="menu-item">
+                        <NavLink to="/my-feedback">My Feedback</NavLink>
+                    </div>
+                    <div className="menu-item">Team Feedback</div>
+                    <div className="menu-item">Teams</div>
+                </div>
                 <div className="feedback-cycle">
                     <div className="label">Next Feedback Cycle:</div>
                     <div className="feedback-date">
@@ -117,10 +133,10 @@ const Header = function() {
                 </div>
                 <div className="user">
                     <div className="user-photo">
-                        <img src={imageSrc} alt="" className="photo" />
+                        <img src={user ? user.avatar : defaultAvatar} alt="" className="photo" />
                     </div>
                     <div className="user-name">
-                        <div className="name">Wade Wilson</div>
+                        <div className="name">{user ? user.name : ''}</div>
                         <a href="" className="logout">Logout</a>
                     </div>
                 </div>
@@ -128,6 +144,10 @@ const Header = function() {
         </StyledHeader>
     );
 
+};
+
+Header.propTypes = {
+    user: PropTypes.object
 };
 
 export default Header;
