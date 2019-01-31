@@ -117,7 +117,7 @@ const Header = ({ user }) => {
                 <div className="logo">Honesto</div>
                 <div className="nav-menu">
                     <div className="menu-item">
-                        <NavLink exact={true} to="/">Share Feedback</NavLink>
+                        <NavLink exact={true} to="/share-feedback">Share Feedback</NavLink>
                     </div>
                     <div className="menu-item">
                         <NavLink to="/my-feedback">My Feedback</NavLink>
@@ -137,7 +137,15 @@ const Header = ({ user }) => {
                     </div>
                     <div className="user-name">
                         <div className="name">{user ? user.name : ''}</div>
-                        <a href="" className="logout">Logout</a>
+                        <a
+                            href=""
+                            onClick={() => {
+                                localStorage.setItem('loggedIn', false);
+                            }}
+                            className="logout"
+                        >
+                            Logout
+                        </a>
                     </div>
                 </div>
             </NavBar>

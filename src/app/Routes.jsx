@@ -1,9 +1,35 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
+    Redirect,
     Route,
     Switch
 } from 'react-router-dom';
-import { ShareFeedback, MyFeedback, ErrorView } from './';
+import {
+    LoginPage,
+    ShareFeedback,
+    MyFeedback,
+    ErrorView } from './';
+
+
+export const PrivateRoute = ({ component: Component, ...rest }) => {
+    const loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
+
+    return (
+        <Route
+            {...rest}
+            render={(props) => (
+                loggedIn === true
+                    ? <Component {...props} />
+                    : <Redirect to="/login" />
+            )}
+        />
+    );
+};
+
+PrivateRoute.propTypes = {
+    component: PropTypes.func
+};
 
 /**
  * These routes are ONLY the base routes that are necessary in order to not trigger the ErrorView.
@@ -14,11 +40,25 @@ import { ShareFeedback, MyFeedback, ErrorView } from './';
  */
 export const Routes = {
     baseRoutes: () => {
+        const loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
+
         return (
             <div className="routes">
                 <Switch>
-                    <Route path="/" exact={true} component={ShareFeedback} />
-                    <Route path="/my-feedback" exact={true} component={MyFeedback} />
+                    <Route
+                        path="/"
+                        exact={true}
+                        render={() => (
+                            loggedIn ? (
+                                <Redirect to="/share-feedback" />
+                            ) : (
+                                <Redirect to="/login" />
+                            )
+                        )}
+                    />
+                    <Route path="/login" exact={true} component={LoginPage} />
+                    <PrivateRoute path="/share-feedback" component={ShareFeedback} />
+                    <PrivateRoute path="/my-feedback" exact={true} component={MyFeedback} />
 
                     <Route component={ErrorView} />
                 </Switch>

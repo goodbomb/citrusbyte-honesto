@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Route } from 'react-router-dom';
 import UserList from './UserList';
+import { FeedbackWizard } from './feedback-wizard';
 
 const StyledFeedback = styled.section`
     display: flex;
@@ -44,8 +47,19 @@ class ShareFeedback extends Component {
         return (
             <StyledFeedback className="share-feedback">
                 <div className="wrapper">
-                    <h1>Share Feedback</h1>
-                    <UserList users={this.state.users} />
+                    <Route
+                        path={this.props.match.path}
+                        exact={true}
+                        render={() => {
+                            return (
+                                <div className="feedback-users">
+                                    <h1>Share Feedback</h1>
+                                    <UserList users={this.state.users} />
+                                </div>
+                            );
+                        }}
+                    />
+                    <Route path={`${this.props.match.path}/:userId`} render={(routeProps) => <FeedbackWizard routeProps={routeProps} />} />
                 </div>
             </StyledFeedback>
         );
@@ -53,5 +67,9 @@ class ShareFeedback extends Component {
     }
 
 }
+
+ShareFeedback.propTypes = {
+    match: PropTypes.object
+};
 
 export default ShareFeedback;

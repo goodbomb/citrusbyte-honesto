@@ -10,10 +10,21 @@ const seedData = {
                 id: '9390823928',
                 name: 'Peter Parker',
                 avatar: 'https://preview.redd.it/9ej9735r8dv11.png?width=331&auto=webp&s=d9491933c36ff23ff11d6fbf0d403cb7bedace24',
-                submission: {
-                    id: '5992758510',
-                    complete: false
-                }
+                complete: false,
+                questions: [
+                    {
+                        id: '1510702622',
+                        formType: 'multiple-choice'
+                    },
+                    {
+                        id: '1510702623',
+                        formType: 'rank-scale'
+                    },
+                    {
+                        id: '1510702624',
+                        formType: 'free-form'
+                    }
+                ]
             }
         ],
         completed: [
@@ -21,10 +32,7 @@ const seedData = {
                 id: '5385527224',
                 name: 'Frank Castle',
                 avatar: 'https://avatarfiles.alphacoders.com/151/151995.jpg',
-                submission: {
-                    id: '8645150742',
-                    complete: true
-                }
+                complete: true
             }
         ]
     }

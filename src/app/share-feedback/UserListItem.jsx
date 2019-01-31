@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 import { palette } from 'theme';
 
 const StyledUserListItem = styled.li`
@@ -38,7 +39,7 @@ const StyledName = styled.div`
     }
 `;
 
-const UserListItem = ({ user }) => {
+const UserListItem = ({ user, history }) => {
 
     const defaultAvatar = 'https://www.cansolveckd.ca/wp-content/uploads/2018/07/generic-avatar.png';
 
@@ -49,9 +50,16 @@ const UserListItem = ({ user }) => {
                     <img src={user.avatar || defaultAvatar} alt="user avatar" />
                 </div>
                 <StyledName className="name">{user.name}</StyledName>
-                {user.submission.complete
+                {user.complete
                     ? <button className="view-submission secondary">View Submission</button>
-                    : <button className="fill-out primary">Fill Out</button>
+                    : <button
+                        className="fill-out primary"
+                        onClick={() => {
+                            history.push(`/share-feedback/${user.id}`);
+                        }}
+                    >
+                        Fill Out
+                    </button>
                 }
             </StyledUserListItem>
         );
@@ -61,7 +69,8 @@ const UserListItem = ({ user }) => {
 };
 
 UserListItem.propTypes = {
+    history: PropTypes.object,
     user: PropTypes.object
 };
 
-export default UserListItem;
+export default withRouter(UserListItem);

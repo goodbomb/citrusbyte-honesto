@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Content, Header, Footer } from './';
 import seedData from '../seedData.js';
+import background from '../../assets/images/login-background.svg';
 
+const backgroundImage = JSON.parse(localStorage.getItem('loggedIn')) ? 'none;' : `url(${ background });`;
 const StyledLayout = styled.div`
+    background-size: cover;
     min-height: 100%;
     position: relative;
+
+    /* stylelint-disable */
+    ${props => !props.loggedIn && css`
+        background-image: ${backgroundImage};
+    `}
+    /* stylelint-enable */
 `;
 
 class Layout extends Component {
@@ -15,12 +24,8 @@ class Layout extends Component {
         super(props);
 
         this.state = {
-            currentUser: {
-                id: null,
-                name: '',
-                avatar: ''
-            },
-            feedback: {}
+            currentUser: seedData.currentUser,
+            feedback: seedData.feedback
         };
     }
 
@@ -45,10 +50,12 @@ class Layout extends Component {
     }
 
     render() {
+        const loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
+
         return (
-            <StyledLayout className="layout">
-                <Header user={this.state.currentUser} />
-                <Content children={this.props.children} {...this.state} />
+            <StyledLayout className="layout" loggedIn={loggedIn}>
+                {loggedIn ? <Header user={this.state.currentUser} /> : null}
+                <Content children={this.props.children} />
                 <Footer />
             </StyledLayout>
         );
