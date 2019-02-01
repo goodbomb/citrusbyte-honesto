@@ -121,6 +121,7 @@ class FeedbackWizard extends Component {
                     return (
                         <RankScaleForm
                             questionData={questionData}
+                            questionIndex={this.state.currentSlide}
                             user={this.state.userData}
                             updateAnsweredState={this.updateAnsweredState}
                         />
@@ -129,8 +130,8 @@ class FeedbackWizard extends Component {
                     return (
                         <FreeForm
                             questionData={questionData}
+                            questionIndex={this.state.currentSlide}
                             user={this.state.userData}
-                            updateAnsweredState={this.updateAnsweredState}
                         />
                     );
                 default:
@@ -193,7 +194,7 @@ class FeedbackWizard extends Component {
                         <button className="previous secondary" disabled={true}>Skip</button>
                         <button
                             className="previous primary"
-                            disabled={questionData && !questionData.value}
+                            disabled={questionData && !questionData.value && questionData.formType !== 'free-form'}
                             onClick={() => {
                                 this.setState({ currentSlide: this.state.currentSlide + 1});
                                 this.navigateSlides(this.state.currentSlide + 1);
@@ -214,8 +215,7 @@ class FeedbackWizard extends Component {
 }
 
 FeedbackWizard.propTypes = {
-    title: PropTypes.string,
-    formType: PropTypes.string
+    routeProps: PropTypes.object
 };
 
 export default FeedbackWizard;

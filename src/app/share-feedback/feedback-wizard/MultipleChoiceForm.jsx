@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Options = styled.div`
-    list-style: none;
-    margin: 0;
-    padding: 0;
-
     .option {
         background: #f2f3f4;
         border-radius: 3px;
