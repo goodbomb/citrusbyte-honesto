@@ -117,7 +117,7 @@ const Header = ({ user }) => {
                 <div className="logo">Honesto</div>
                 <div className="nav-menu">
                     <div className="menu-item">
-                        <NavLink exact={true} to="/share-feedback">Share Feedback</NavLink>
+                        <NavLink to="/share-feedback">Share Feedback</NavLink>
                     </div>
                     <div className="menu-item">
                         <NavLink to="/my-feedback">My Feedback</NavLink>

@@ -35,30 +35,41 @@ const GlobalStyle = createGlobalStyle`
         &:hover {
             cursor: pointer;
         }
-    }
 
-    button.primary {
-        background-color: ${palette.primaryColor};
-        border: solid 1px ${palette.primaryColor};
-        border-radius: 4px;
-        color: ${palette.accentTextColor};
-        transition: background-color 0.25s, color 0.25s;
-
-        &:hover {
-            background-color: ${palette.canvasColor};
-            color: ${palette.primaryColor};
+        &:disabled {
+            background-color: ${palette.canvasColor} !important;
+            cursor: default;
         }
-    }
 
-    button.secondary {
-        background-color: ${palette.canvasColor};
-        border: solid 1px ${palette.borderColor};
-        border-radius: 4px;
-        font-weight: bold;
-        transition: background-color 0.25s;
+        &.primary {
+            background-color: ${palette.primaryColor};
+            border: solid 1px ${palette.primaryColor};
+            border-radius: 4px;
+            color: ${palette.accentTextColor};
+            transition: background-color 0.25s, color 0.25s;
 
-        &:hover {
-            background-color: #f2f3f4;
+            &:hover {
+                background-color: ${palette.canvasColor};
+                color: ${palette.primaryColor};
+            }
+
+            &:disabled {
+                background-color: #acb1b6 !important;
+                border-color: #acb1b6 !important;
+                color: ${palette.canvasColor} !important;
+            }
+        }
+
+        &.secondary {
+            background-color: ${palette.canvasColor};
+            border: solid 1px ${palette.borderColor};
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.25s;
+
+            &:hover {
+                background-color: #f2f3f4;
+            }
         }
     }
 `;

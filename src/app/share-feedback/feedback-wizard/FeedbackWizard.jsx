@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import {
     FeedbackThankYou,
     FreeForm,
@@ -8,12 +9,76 @@ import {
     RankScaleForm
 } from './';
 
+const WizardForm = styled.div`
+    .wizard-title-section {
+        align-items: center;
+        display: flex;
+
+        .title-area {
+            .question-title {
+                font-size: 31px;
+                margin: 0;
+            }
+
+            .question-subtitle {
+                color: #acb1b6;
+                font-size: 12px;
+                letter-spacing: 0.15em;
+                margin: 12px 0;
+                text-transform: uppercase;
+            }
+        }
+
+        .user-avatar {
+            margin-left: auto;
+            width: 58px;
+
+            img {
+                border-radius: 99px;
+                height: 58px;
+            }
+        }
+    }
+
+    .wizard-container {
+        background: #ffffff;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+        padding: 20px;
+    }
+
+    .wizard-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin: 36px 0;
+    }
+
+    .completed-questions {
+        color: #031323;
+
+        .label {
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 0.15em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .status {
+            font-size: 16px;
+        }
+    }
+`;
+
 class FeedbackWizard extends Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {};
+        this.state = {
+            currentSlide: 0,
+            userData: null,
+            questionAnswered: false
+        };
     }
 
     componentDidMount() {
@@ -24,40 +89,125 @@ class FeedbackWizard extends Component {
         })[0];
 
         this.setState({
-            userData
+            currentSlide: userData.currentQuestion,
+            userData,
+            questionAnswered: this.state.userData && this.state.userData.questions[this.state.currentSlide].value ? true : false
         });
+    }
+
+    updateAnsweredState = () => {
+        this.setState({ questionAnswered: true });
     }
 
     /**
      * Renders the appropriate form based on the supplied props.
      *
-     * @param  {string}  formType [The type of form to render]
-     * @return {element}          [The form to render]
+     * @param  {string}  questionData [The question data object.]
+     * @return {element}              [The form to render]
      */
-    renderForm(formType) {
-        switch (formType) {
-            case 'multiple-choice':
-                return <MultipleChoiceForm />;
-            case 'rank-scale':
-                return <RankScaleForm />;
-            case 'free-form':
-                return <FreeForm />;
-            default:
-                return <FeedbackThankYou />;
+    renderForm(questionData) {
+        if (questionData) {
+            switch (questionData.formType) {
+                case 'multiple-choice':
+                    return (
+                        <MultipleChoiceForm
+                            questionData={questionData}
+                            questionIndex={this.state.currentSlide}
+                            user={this.state.userData}
+                            updateAnsweredState={this.updateAnsweredState}
+                        />
+                    );
+                case 'rank-scale':
+                    return (
+                        <RankScaleForm
+                            questionData={questionData}
+                            user={this.state.userData}
+                            updateAnsweredState={this.updateAnsweredState}
+                        />
+                    );
+                case 'free-form':
+                    return (
+                        <FreeForm
+                            questionData={questionData}
+                            user={this.state.userData}
+                            updateAnsweredState={this.updateAnsweredState}
+                        />
+                    );
+                default:
+                    return <FeedbackThankYou />;
+            }
         }
     }
 
+    /**
+     * Updates the slide that is currently visible.
+     *
+     * @param {number} newValue
+     * @return {undefined}
+     */
+    navigateSlides(newValue) {
+        const feedbackData = JSON.parse(localStorage.getItem('feedback'));
+        const userIndex = feedbackData.todo.findIndex((item) => {
+            return item.id === this.state.userData.id;
+        });
+
+        const newUserObj = Object.assign({}, this.state.userData);
+        const newfeedbackObj = Object.assign({}, feedbackData);
+
+        newUserObj.currentQuestion = newValue;
+        newfeedbackObj.todo[userIndex] = newUserObj;
+
+        localStorage.setItem('feedback', JSON.stringify(newfeedbackObj));
+    }
+
     render() {
-        console.log(this.state);
+        const currentQuestion = this.state.currentSlide + 1;
+        const user = this.state.userData;
+        const numQuestions = user ? user.questions.length : 1;
+        const questionData = user ? user.questions[this.state.currentSlide] : null;
 
         return (
-            <div className="wizard">
-                <div className="feedback-title">{this.props.title}</div>
-                <div className="wizard-container">
-                    <div className="feedback-form">{this.renderForm(this.props.formType)}</div>
-                    <div className="wizard-buttons">Buttons</div>
+            <WizardForm className="wizard">
+                <div className="wizard-title-section">
+                    <div className="title-area">
+                        <h2 className="question-title">{questionData && questionData.title}</h2>
+                        <h3 className="question-subtitle">Share your feedback for {user && user.name}</h3>
+                    </div>
+                    <div className="user-avatar">
+                        <img src={user && user.avatar} alt="user avatar" />
+                    </div>
                 </div>
-            </div>
+                <div className="wizard-container">
+                    <div className="question-form">{this.renderForm(questionData)}</div>
+                    <div className="wizard-buttons">
+                        <button
+                            className="previous secondary"
+                            disabled={this.state.currentSlide === 0}
+                            onClick={() => {
+                                this.setState({ currentSlide: this.state.currentSlide - 1 });
+                                this.navigateSlides(this.state.currentSlide - 1);
+                            }}
+                        >
+                            Previous
+                        </button>
+                        <button className="previous secondary" disabled={true}>Skip</button>
+                        <button
+                            className="previous primary"
+                            disabled={questionData && !questionData.value}
+                            onClick={() => {
+                                this.setState({ currentSlide: this.state.currentSlide + 1});
+                                this.navigateSlides(this.state.currentSlide + 1);
+                            }}
+                        >
+                            Next
+                        </button>
+                    </div>
+                    <div className="completed-questions">
+                        <div className="label">Questions Completed</div>
+                        <div className="status">{currentQuestion}/{numQuestions}</div>
+                    </div>
+                </div>
+            </WizardForm>
         );
     }
 

@@ -51,7 +51,14 @@ const UserListItem = ({ user, history }) => {
                 </div>
                 <StyledName className="name">{user.name}</StyledName>
                 {user.complete
-                    ? <button className="view-submission secondary">View Submission</button>
+                    ? <button
+                        className="view-submission secondary"
+                        onClick={() => {
+                            history.push('/my-feedback');
+                        }}
+                    >
+                        View Submission
+                    </button>
                     : <button
                         className="fill-out primary"
                         onClick={() => {

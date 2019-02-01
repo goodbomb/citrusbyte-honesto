@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 const seedData = {
     currentUser: {
         id: '2613399432',
@@ -11,18 +13,42 @@ const seedData = {
                 name: 'Peter Parker',
                 avatar: 'https://preview.redd.it/9ej9735r8dv11.png?width=331&auto=webp&s=d9491933c36ff23ff11d6fbf0d403cb7bedace24',
                 complete: false,
+                currentQuestion: 0,
                 questions: [
                     {
                         id: '1510702622',
-                        formType: 'multiple-choice'
+                        formType: 'multiple-choice',
+                        title: 'How well did this person do X thing last month?',
+                        options: [
+                            {
+                                score: 'low',
+                                title: 'Please Improve',
+                                message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in eros auctor, vestibulum ipsum sit amet, pretium mi. Maecenas scelerisque ex vel enim cursus congue. Duis congue eu sapien ornare bibendum.'
+                            },
+                            {
+                                score: 'average',
+                                title: 'You Were Good',
+                                message: 'Nam mattis augue ut odio volutpat, et venenatis nibh consequat. Praesent accumsan pulvinar sapien, quis gravida ligula commodo a. Curabitur aliquet sit amet augue vel finibus.'
+                            },
+                            {
+                                score: 'high',
+                                title: 'You Were Great',
+                                message: 'Fusce aliquet tellus vel molestie mattis.'
+                            }
+                        ],
+                        value: null
                     },
                     {
                         id: '1510702623',
-                        formType: 'rank-scale'
+                        formType: 'rank-scale',
+                        title: 'How is working with this person?',
+                        value: null
                     },
                     {
                         id: '1510702624',
-                        formType: 'free-form'
+                        formType: 'free-form',
+                        title: 'Do you have any other feedback for this person?',
+                        value: null
                     }
                 ]
             }
