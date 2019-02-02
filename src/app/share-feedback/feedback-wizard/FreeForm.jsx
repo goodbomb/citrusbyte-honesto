@@ -17,7 +17,7 @@ class FreeForm extends Component {
         super(props);
 
         this.state = {
-            value: ''
+            value: props.questionData.value
         };
     }
 
@@ -52,6 +52,7 @@ class FreeForm extends Component {
                     this.saveOption(event.target.value);
                 }}
                 placeholder="Say something..."
+                value={this.state.value}
             />
         );
     }

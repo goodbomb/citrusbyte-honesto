@@ -54,7 +54,7 @@ class Layout extends Component {
 
         return (
             <StyledLayout className="layout" loggedIn={loggedIn}>
-                {loggedIn ? <Header user={this.state.currentUser} /> : null}
+                {loggedIn ? <Header user={this.state.currentUser || seedData.currentUser} /> : null}
                 <Content children={this.props.children} />
                 <Footer />
             </StyledLayout>

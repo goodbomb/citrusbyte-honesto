@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-    FeedbackThankYou,
     FreeForm,
     MultipleChoiceForm,
     RankScaleForm
@@ -91,7 +90,7 @@ class FeedbackWizard extends Component {
         this.setState({
             currentSlide: userData.currentQuestion,
             userData,
-            questionAnswered: this.state.userData && this.state.userData.questions[this.state.currentSlide].value ? true : false
+            questionAnswered: userData && userData.questions[this.state.currentSlide].value ? true : false
         });
     }
 
@@ -127,6 +126,7 @@ class FeedbackWizard extends Component {
                         />
                     );
                 case 'free-form':
+                default:
                     return (
                         <FreeForm
                             questionData={questionData}
@@ -134,8 +134,6 @@ class FeedbackWizard extends Component {
                             user={this.state.userData}
                         />
                     );
-                default:
-                    return <FeedbackThankYou />;
             }
         }
     }
@@ -159,6 +157,35 @@ class FeedbackWizard extends Component {
         newfeedbackObj.todo[userIndex] = newUserObj;
 
         localStorage.setItem('feedback', JSON.stringify(newfeedbackObj));
+    }
+
+    /**
+     * Sets the user feedback to "complete" if on the final question.
+     *
+     * @return {undefined}
+     */
+    setFeedbackToComplete() {
+        const feedbackData = JSON.parse(localStorage.getItem('feedback'));
+        const userIndex = feedbackData.todo.findIndex((item) => {
+            return item.id === this.state.userData.id;
+        });
+
+        if (feedbackData.todo[userIndex].questions.length === feedbackData.todo[userIndex].currentQuestion) {
+            const newUserObj = Object.assign({}, feedbackData.todo[userIndex]);
+            const newfeedbackObj = Object.assign({}, feedbackData);
+
+            newUserObj.complete = true;
+            newfeedbackObj.completed.push(newUserObj);
+
+            // move user to completed array
+            if (userIndex > -1) {
+                newfeedbackObj.todo.splice(userIndex, 1);
+            }
+
+            localStorage.setItem('feedback', JSON.stringify(newfeedbackObj));
+
+            this.props.routeProps.history.push('/share-feedback/thank-you');
+        }
     }
 
     render() {
@@ -198,6 +225,7 @@ class FeedbackWizard extends Component {
                             onClick={() => {
                                 this.setState({ currentSlide: this.state.currentSlide + 1});
                                 this.navigateSlides(this.state.currentSlide + 1);
+                                this.setFeedbackToComplete(); // only triggers on final question
                             }}
                         >
                             Next
