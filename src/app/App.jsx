@@ -79,9 +79,9 @@ const App = function(props) {
         <div className="app-root">
             <GlobalStyle />
             <Helmet
-                title="React Redux Webpack Starter"
-                titleTemplate="MySite.com - %s"
-                defaultTitle="My Default Title"
+                title="Honesto Mock App"
+                titleTemplate="CitrusByte - %s"
+                defaultTitle="Honesto Mock App"
             />
 
             <Layout {...props}>
