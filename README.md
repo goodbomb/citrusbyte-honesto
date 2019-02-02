@@ -55,8 +55,9 @@ These were elements / features that I immediately opted to remove from my develo
 - Implement all of the de-scoped functionality from above.
 - Add unit tests using Jest and Enzyme.
 - Polish the "My Feedback" page, creating separate views for "Given Feedback" and "Feedback Received"
-- Implement a rudamentary API for data persistence
-- Utilize Redux for the data store instead of localStorage
+- Implement a rudamentary API for data persistence if there's enough time at the end.
+    - Refactor to use Redux for the data store instead of localStorage.
+    - I would use a separate branch, though, in case I was not able to refactor in time for any presentations at the end of the week, ensuring that the local storage solution was ready to present.
 - More up-front planning and architectural design. With the time constraints, I didn't really have time to plan everything out well.
 
 ## What I would do differently if I did this again
