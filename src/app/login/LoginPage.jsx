@@ -28,7 +28,7 @@ const StyledLogin = styled.div`
     height: 380px;
     justify-content: center;
     left: 50%;
-    margin: -190px 0 0 -190px;
+    margin: -230px 0 0 -190px;
     position: absolute;
     top: 50%;
     width: 380px;
