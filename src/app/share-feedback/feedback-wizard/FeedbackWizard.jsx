@@ -35,6 +35,7 @@ const WizardForm = styled.div`
             img {
                 border-radius: 99px;
                 height: 58px;
+                width: 58px;
             }
         }
     }

@@ -55,7 +55,7 @@ const UserListItem = ({ user, history }) => {
                     ? <button
                         className="view-submission secondary"
                         onClick={() => {
-                            history.push('/my-feedback');
+                            history.push(`/my-feedback/${user.id}`);
                         }}
                     >
                         View Submission

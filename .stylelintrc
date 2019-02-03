@@ -93,7 +93,8 @@
         "selector-pseudo-element-colon-notation": "double",
         "selector-type-case": "lower",
         selector-type-no-unknown: [true, {
-            ignore: ["custom-elements", "default-namespace"]
+            ignore: ["custom-elements", "default-namespace"],
+            ignoreTypes: ['$dummyValue']
         }],
         "shorthand-property-no-redundant-values": true,
         "string-no-newline": true,

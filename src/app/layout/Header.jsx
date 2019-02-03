@@ -43,6 +43,7 @@ const NavBar = styled.nav`
 
             a {
                 border-bottom: solid 3px transparent;
+                color: ${palette.primaryTextColor};
                 padding: 30px 0 23px;
 
                 &:visited {

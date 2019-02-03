@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { palette } from 'theme';
 
@@ -9,10 +10,15 @@ const StyledUserListItem = styled.li`
     display: flex;
     list-style: none;
     margin: 0;
-    padding: 16px 20px;
+    padding: 14px 20px;
 
     &:hover {
-        background-color: rgba(213, 176, 242, 0.1);
+        background-color: #fbf7fe;
+        cursor: pointer;
+    }
+
+    &.active {
+        background-color: #f2f3f4;
     }
 
     .avatar {
@@ -22,6 +28,7 @@ const StyledUserListItem = styled.li`
         img {
             border-radius: 99px;
             height: 58px;
+            width: 58px;
         }
     }
 
@@ -36,12 +43,16 @@ const StyledName = styled.div`
     }
 `;
 
-const UserListSidebarItem = ({ user }) => {
+const UserListSidebarItem = ({ user, match, history }) => {
 
     const defaultAvatar = 'https://www.cansolveckd.ca/wp-content/uploads/2018/07/generic-avatar.png';
+    const isActive = match.params.userId === user.id;
 
     return (
-        <StyledUserListItem>
+        <StyledUserListItem
+            className={`list-item ${isActive ? 'active' : ''}`}
+            onClick={() => history.push(`/my-feedback/${user.id}`)}
+        >
             <div className="avatar">
                 <img src={user.avatar || defaultAvatar} alt="user avatar" />
             </div>
@@ -51,7 +62,9 @@ const UserListSidebarItem = ({ user }) => {
 };
 
 UserListSidebarItem.propTypes = {
+    history: PropTypes.object,
+    match: PropTypes.object,
     user: PropTypes.object
 };
 
-export default UserListSidebarItem;
+export default withRouter(UserListSidebarItem);

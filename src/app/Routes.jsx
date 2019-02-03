@@ -58,7 +58,7 @@ export const Routes = {
                     />
                     <Route path="/login" exact={true} component={LoginPage} />
                     <PrivateRoute path="/share-feedback" component={ShareFeedback} />
-                    <PrivateRoute path="/my-feedback" exact={true} component={MyFeedback} />
+                    <PrivateRoute path="/my-feedback/:userId?" component={MyFeedback} />
 
                     <Route component={ErrorView} />
                 </Switch>

@@ -202,14 +202,14 @@ const seedData = {
                                 message: 'Fusce aliquet tellus vel molestie mattis.'
                             }
                         ],
-                        value: 3
+                        value: 2
                     },
                     {
                         id: '4510712623',
                         formType: 'rank-scale',
                         title: 'How is working with this person Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet?',
                         description: 'Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque ultricies nibh mauris, at volutpat sem congue ut. Maecenas felis justo, blandit eu suscipit nec, hendrerit ut odio. Proin interdum elit eu semper tristique. Donec id consectetur mi. Aliquam accumsan sem ut maximus ornare. Duis eu mi consectetur, consectetur mauris id, congue velit.',
-                        value: 10
+                        value: 1
                     },
                     {
                         id: '4510712633',
