@@ -34,7 +34,6 @@ These were elements / features that I immediately opted to remove from my develo
 - The "Next Feedback Cycle" in the header. It is visualy there, but static.
 - The "notification" numbers above the "Share Feedback" and "My Feedback" navbar options.
 - The "No Feedback to Display" view
-    - Since we're using seed data, this view would never be visible anyway.
 - The "Back" button in the Feedback wizard.
 - The "Progress Bar", "Star Rating", and "Flag" pieces of the feedback wizard.
 - The "Skip" button in the feedback wizard.
